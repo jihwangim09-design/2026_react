@@ -16,12 +16,19 @@ function Footer( props ){       // 푸터
 }
 
 
-function Heder( props ){        // 헤더
+function Header( props ){        // 헤더
     return <div> 헤더구역 </div>
 
 }
 export default function Component1( props ){    // 본문
     return (<>
-        <div> 메인페이지</div>
-        </>)
+
+    <Header> </Header>
+
+    <div> 메인페이지 </div>
+
+    <Footer> </Footer>
+
+
+    </>)
 }
