@@ -10,6 +10,9 @@ const create = createRoot( root );
 // import App from './App.jsx'
 // 2. 가져온 컴포넌트 렌더링하기
 // create.render( <App> </App> )
-// [day01]
-import MyMarkup from "./example/day01/MyMarkup";
-create.render( <MyMarkup> </MyMarkup>)
+// [day01] render는 1번만 가능하므로 예제 컴포넌트 변경
+// import MyMarkup from "./example/day01/MyMarkup";
+// create.render( <MyMarkup> </MyMarkup>)
+
+import Component1 from "./example/day01/Component1";
+create.render( <Component1> </Component1>)
