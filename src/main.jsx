@@ -17,5 +17,5 @@ const create = createRoot( root );
 // import Component1 from "./example/day01/Component1";
 // create.render( <Component1> </Component1>)
 
-import Component2 from "./example/day01/Component2";
-create.render( <Component2> </Component2>)
+import Component5 from "./example/day01/Component5";
+create.render( <Component5> </Component5>)
