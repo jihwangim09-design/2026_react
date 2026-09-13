@@ -1,16 +1,17 @@
 // Component4.jsx 만들고 87~88 코드 따라서 작성
 function FrontComp(props) {
+    // props = frontData = ['HTML5' , 'CSS3' , 'Javascript' , 'jQuery' ] , frTitle="프론트엔트" 객체 하나에 각각의 변수값을 담아서 가져옴
     const liRows = []; // 4 <li> 태그들을 담을 빈 배열
     for( let i = 0; i<props.propData1.length ; i++ ) { // 5 i=0: liRows.push(<li key={0}>HTML5</li>) .. i=4가되면 종료
         // 부모로 부터 전달받은 props내 propData1 반복
         liRows.push(<li key={i}>{props.propData1[i]}</li> );
         // 배열명.push( 값 ); // 배열내 값 추가
     }   
-    return (<> {/* 6 
+    return (<> {/* 6    return은  두 개의 태그를 묶은 한 덩어리를 반환
     <li>프론트엔트</li> + <ul>로 감싸진 4개의 <li>들을 Component4에게 반환
     */}
-        <li>{props.frTitle}</li>
-        <ul>
+        <li>{props.frTitle}</li> {/* <li> — List Item (목록 항목) <ul> 또는 <ol> 안에서만 쓰는, "목록의 항목 하나하나"를 나타냄 반드시 <ul>이나 <ol>로 감싸진 상태 */}
+        <ul> {/*<ul> = Unordered List (순서 없는 목록) 순서가 중요하지 않은 목록*/}
             {liRows}
         </ul>
     </>)
@@ -26,7 +27,7 @@ const BackComp = ( {propData2, baTitle} ) => {
         );
     }
     return (<>
-    <li>{baTitle}</li>
+    <li>{baTitle}</li> {/* liRows 안에 <li>가 4개 들어있음 */}
     <ul>
         {liRows}
     </ul>
@@ -40,9 +41,23 @@ function Component4() {
     return (<>
         <div>
         <h2>React-Props</h2>
-        <ol>
-            <FrontComp propData1={frontData} frTitle="프론트엔트"></FrontComp> {/* 3 */}
-            <BackComp propData2={backData} baTitle="백엔드"/> {/* 7 */}
+        <ol> {/*<ol> — Ordered List (순서 있는 목록) 1, 2, 3 같은 번호가 자동으로 매겨지는, 순서가 중요한 목록 몇 번째냐"가 중요한 것*/}
+            <FrontComp propData1={frontData} frTitle="프론트엔트"></FrontComp> {/* 3
+            <li>프론트엔트</li>
+            <ul>
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>Javascript</li>
+                <li>jQuery</li>
+            </ul>  이렇게 들어옴           */}
+            <BackComp propData2={backData} baTitle="백엔드"/> {/* 7     /> 자체 닫힘 태그를 넣음
+            <li>백엔드</li>
+            <ul>
+                <li>Java</li>
+                <li>Oracle</li>
+                <li>JSP</li>
+                <li>Spring Boot</li>
+            </ul>  백엔드도 마찬가지 */}
 
         </ol>
 
