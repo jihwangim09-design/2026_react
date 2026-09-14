@@ -9,9 +9,9 @@ function Component4() {
     let contents = '';
     if(mode==='front'){
         contents = <>
-        <FrontComp onSetMode={(mode) => {
+        <FrontComp1 onSetMode={(mode) => {
             setMode(mode);
-        }}></FrontComp>
+        }}></FrontComp1>
         </>
     }
     else if(mode==='back'){
@@ -21,9 +21,9 @@ function Component4() {
     }
     else{
         contents = <>
-        <FrontComp onSetMode={(mode)=> {
+        <FrontComp1 onSetMode={(mode)=> {
             handleSetMode(mode);
-        }}></FrontComp>
+        }}></FrontComp1>
         <BackComp1 setmode={handleSetMode} />
         </>
     }
