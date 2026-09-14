@@ -1,4 +1,4 @@
-const BackComp = ({onMyEvent2}) => {
+const BackComp = ({setMode}) => {
     return (<>
     <li><a href="/" onClick={(event) => { {/* <a> = 링크태그 , href="/"는 / 주소(사이트 첫 페이지) 이동 */}
         event.preventDefault(); // 깜빡거림 제거 
