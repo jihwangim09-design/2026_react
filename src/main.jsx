@@ -29,5 +29,8 @@ const create = createRoot( root );
 // import Productmanager from "./example/day02/totalpractice/ProductManager.jsx"
 // create.render( <Productmanager /> )
 
-import Component2 from "./example/day03/Component2";
-create.render( <Component2 /> )
+// import Component2 from "./example/day03/Component2";
+// create.render( <Component2 /> )
+
+import Component3 from "./example/day03/Component3";
+create.render( <Component3/>)
