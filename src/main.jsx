@@ -26,5 +26,5 @@ const create = createRoot( root );
 // import Component1 from "./example/day02/Component1";
 // create.render( <Component1> </Component1>)
 
-import Component4 from "./example/day02/Component4";
-create.render( <Component4 /> )
+import Productmanager from "./example/day02/totalpractice/ProductManager.jsx"
+create.render( <Productmanager /> )
