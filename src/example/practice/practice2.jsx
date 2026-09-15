@@ -1,70 +1,43 @@
-import { useState } from 'react';
+import { useState } from "react"
 
-export default function Practice2() {
-
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [age, setAge] = useState('');
-
-  
-    const [list, setList] = useState([
-        { name: '신동엽', phone: '010-7894-7894', age: 50 },
-        { name: '강호동', phone: '010-4321-4321', age: 40 },
-        { name: '유재석', phone: '010-1234-1234', age: 30 },
-    ]);
-
-
-    const handleAdd = () => {
-        if (name === '' || phone === '' || age === '') {
-            alert('모든 항목을 입력하세요.');
-            return;
-        }
-        const newPerson = { name: name, phone: phone, age: age };
-        setList([...list, newPerson]);
-
-        setName('');
-        setPhone('');
-        setAge('');
-    };
-
-    const handleDelete = (index) => {
-        const newList = list.filter((item, i) => i !== index);
-        setList(newList);
-    };
-
+export default function Practice2( props ){ // HTML --> CSS --> JS
+    const [ name , setName ] = useState( '' ) // 일반변수가 아닌 상태변수 사용.
+    const [ phone , setPhone ] = useState( '' );
+    const [ age , setAge ] = useState( 0 ) ;
+    const [ members , setMembers ] = useState( [ ] ); // 빈배열 선언 
+    // --- 등록함수 ---
+    const 등록함수 = ( ) => { 
+        const obj = { name , phone , age } // 입력받은 값 3개를 객체로 만든다.
+        members.push( obj ); // 배열에 만든 객체 저장
+        setMembers( [ ...members ] ) // 렌더링 위한 members setter 에 스프레드연산자로 배열복사
+    }
+    // --- 삭제함수 ---
+    const 삭제함수 = ( index )=> {
+        members.splice( index , 1 ) // JS에서 특정 인덱스에서 1개 삭제
+        setMembers( [...members ] ) // 렌더링 위한 코드!!!
+    }
     return (<>
-            <h2>전화번호부</h2>
+        <input value={ name } onChange={ (e) => { setName(e.target.value); }} />
+        <input value={ phone} onChange={ (e) => { setPhone(e.target.value); } }/>
+        <input value={ age } onChange={ (e) => { setAge(e.target.value); }} />
+        <button onClick={ 등록함수 }> 등록 </button>
 
-            <input 
-                type="text" 
-                placeholder="성명" 
-                value={name}
-                onChange={(event) => setName(event.target.value)} 
-            />
-            <input 
-                type="text" 
-                placeholder="연락처 (예: 010-1234-5678)" 
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)} 
-            />
-            <input 
-                type="text" 
-                placeholder="나이" 
-                value={age}
-                onChange={(event) => setAge(event.target.value)} 
-            />
-            <button type="button" onClick={handleAdd}>등록</button>
-
-            <ul>
-                {list.map((item, index) => (
-                    <li key={index}>
-                        성명: {item.name} 연락처: {item.phone} 나이: {item.age}
-                        <button type="button" onClick={() => handleDelete(index)}>삭제</button>
-                    </li>
-                ))}
-            </ul>
-
-            <div>총 {list.length}명</div>
-        </>
-    );
+        <br />
+        {
+            members.map( ( m , index)=> {
+                return (<>
+                    <div>
+                        <span> 성명: {m.name} </span>
+                        <span> 연락처: {m.phone} </span>
+                        <span> 나이: {m.age} </span>
+                        { index }
+                        <button onClick={ ()=>{ 삭제함수(index) } }> 
+                            삭제 
+                        </button>
+                    </div>
+                </>);
+            })
+        }
+        <div> 총 인원 : { members.length }명 </div>
+    </>)   
 }
