@@ -32,7 +32,7 @@ function WriteForm( props ){
 export default function Component2( props ){
     const [ message , setMessage ] = useState( '폼값 검증 진행 중')
     let 입력받은값 = '유재석';
-    cosnt [ 입력받은값2 , set입력받은값2 ] = useState('');
+    const [ 입력받은값2 , set입력받은값2 ] = useState('');
     return (<>
     <input />
     <input value={ 입력받은값 }/> {/* value에 초기화화면 재렌더링 없이 수정불가능/불변성 */}
