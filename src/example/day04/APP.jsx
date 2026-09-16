@@ -3,8 +3,10 @@ import Home from "./Home";
 import TopNavi from "./TopNavi";
 import NotFound from "./NotFound";
 import CommonLayout from "./CommonLayout";
-import LayoutIndex from "./Layoutindex";
+import LayoutIndex from "./LayoutIndex";
 import RouterHooks from "./RouterHooks";
+import kim from "./kim";
+
 export default function App( props ){
     return (<> 
         <TopNavi></TopNavi>
@@ -12,7 +14,8 @@ export default function App( props ){
             <Route path="/" element={ <Home/> } />
             <Route path="/intro" element={ <CommonLayout/>} >
                 <Route index element={ <LayoutIndex /> } />
-                <Route path="router" element={<RouterHooks />} />
+                <Route path="router" element={ <RouterHooks/> } />
+                <Route path="kim" element={ <kim/>} />
             </Route>
             <Route path="*" element={ <NotFound/> } />
         </Routes>
