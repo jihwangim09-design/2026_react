@@ -1,0 +1,45 @@
+.Wrap{
+    display: flex;
+}
+
+*{
+    margin: 0px;
+}
+
+.NavBox{
+    width: 20%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #343336;
+}
+
+.NavBox > h2 {
+    color: white;
+
+}
+
+.top{
+    text-decoration: none;
+    color: white; 
+    padding: 10px; 
+    margin: 10px;
+}
+
+.bottom{ 
+    text-decoration: none;
+    color: white; padding: 10px;  margin: 10px;
+}
+
+.NavBox > div {
+    color: #e2e2e2;
+ 
+    padding: 10px;
+     margin: 50px 10px 10px 10px;
+}
+
+.bottom:hover,
+.top:hover{
+    background-color: rgb(56, 56, 149);
+    border-radius: 10px;
+}

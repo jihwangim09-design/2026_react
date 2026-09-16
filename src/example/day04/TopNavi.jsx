@@ -6,8 +6,8 @@ export default function TopNavi( props ){
             <NavLink to = "/"> Home2,  </NavLink>
             <NavLink to = "/intro"> 인트로,  </NavLink>
             <NavLink to = "/intro/router"> 라우터관련훅,  </NavLink>
-            <NavLink to = "/intro/kim"> 이동, </NavLink>
-            <Link to = "/xyz"> 잘못된주소 </Link>
+            <Link to = "/xyz"> 잘못된주소, </Link>
+            <Link to = "/kim"> kim </Link>
         </div>
     </>)
 }

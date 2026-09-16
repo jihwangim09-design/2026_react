@@ -1,4 +1,4 @@
-export default function kim(props){
+export default function Kim(props){
     return (<>
     <div>
         <h2>김지환</h2>
