@@ -49,10 +49,10 @@ const create = createRoot( root );
     //</BrowserRouter>
 //)
 
-import App2 from "./example/practice3/App";
+import App3 from "./example/practice3/App";
 import { BrowserRouter } from "react-router-dom";
 create.render( 
     <BrowserRouter>
-    <App2/> 
+    <App3/> 
     </BrowserRouter>
 )
