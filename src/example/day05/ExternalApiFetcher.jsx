@@ -29,7 +29,9 @@ function RandomUser(props){
     let trTag = myJSON.results.map((data) => {
         // 간단한 표 이용하여 위에서 정의한 
         return (
+            
             <tr key={data.login.md5}>
+                
                 <td><img src={data.picture.thumbnail} /></td>
                 <td><a href="/" onClick={ (e) => {
                     e.preventDefault();
@@ -39,6 +41,7 @@ function RandomUser(props){
                 <td>{data.nat}</td>
                 <td>{data.email}</td>
             </tr>
+            
         );
     });
 
