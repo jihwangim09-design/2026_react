@@ -19,8 +19,15 @@ function RandomUser(props){
 
 
     // 현재 상태변수에 졵하는 리스트들을 tr로 구성하여 하나씩 html을 만들기
-    
+    // <table>: 표 전체
+    // <thead>: 표의 머리말 부분(제목 줄)
+    // <th>: 머리말 한 칸(제목)
+    // tbody>: 표의 실제 데이터가 들어가는 몸통 부분
+    // <tr>: 표의 한 줄(행)
+    // <td>: 한 칸(셀)
+
     let trTag = myJSON.results.map((data) => {
+        // 간단한 표 이용하여 위에서 정의한 
         return (
             <tr key={data.login.md5}>
                 <td><img src={data.picture.thumbnail} /></td>
@@ -34,12 +41,7 @@ function RandomUser(props){
             </tr>
         );
     });
-    // <table>: 표 전체
-    // <thead>: 표의 머리말 부분(제목 줄)
-    // <th>: 머리말 한 칸(제목)
-    // tbody>: 표의 실제 데이터가 들어가는 몸통 부분
-    // <tr>: 표의 한 줄(행)
-    // <td>: 한 칸(셀)
+
     return( 
         <div>
             <table border='1'> 
