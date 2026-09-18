@@ -21,11 +21,8 @@
       // myJSON : 지금 저장되어 있는 값을 읽는 용도
       // setMyJSON : 그 값을 새로 바꿔서 저장하는 용도
       // setMyJSON(data.data) 뜻은 myJSON이라는 상태에, data.data(진짜 헬스장 배열)를 새로 저장해라
-      // 왜 (data.data);나면 공공데이터가 응답을  data: [ ...헬스장목록... ] 으로 줘서 
+      // 왜 (data.data);나면 공공데이터가 응답을  {"currentCount": 10,"data": [ ... ]} 으로 줘서 
       // 만약에 {"currentCount": 10,"헬스장목록": [ ... ]} 이면 (data.헬스장목록);으로 코드를 작성해야함
-
-
-
       // response.data + 공공데이터 API가 원래 {data: [...]} 형태로 응답
     }, []);
     // 현재 상태변수에 졵하는 리스트들을 tr로 구성하여 하나씩 html을 만들기
