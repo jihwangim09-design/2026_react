@@ -3,17 +3,29 @@
 
   function ProductList(props) {
     const [myJSON, setMyJSON] = useState([]);
+    // myJSON : 지금 저장되어 있는 값을 읽는 용도
+    // setMyJSON : 그 값을 새로 바꿔서 저장하는 용도
     // 객체 안에 빈배열 속성으로 초기화
     // API 응답 결과를 저장하는 상태/변수   // 배열로 바로 초기화
 
     // useEffect( () => { 하고싶은코드 } , [  ] ) // 최초 1번만 실행
     // AXIOS 이용하여 API 통신 하고 응답 결과 상태변수에 저장
     useEffect(async function Data() {
-      const response = await axios.get(
+      const response = await axios.get( //  axios.get("주소") = 주소로 데이터를 요청 후 response에 응답전체 저장
         "http://localhost:8080/test4",
       );
-      const data = response.data;
+      const data = response.data; // 서버가 보낸 내용물만 담긴 곳이 .data , response.data꺼내서 data에 저장
+      // 여기까지 data의 상태는   { currentCount: 10, data: [헬스장 정보가 담긴 배열] } currentCount = 몇개의 데이터가 들어가있는지
       setMyJSON(data.data);
+      // const [myJSON, setMyJSON] = useState([]);
+      // myJSON : 지금 저장되어 있는 값을 읽는 용도
+      // setMyJSON : 그 값을 새로 바꿔서 저장하는 용도
+      // setMyJSON(data.data) 뜻은 myJSON이라는 상태에, data.data(진짜 헬스장 배열)를 새로 저장해라
+      // 왜 (data.data);나면 공공데이터가 응답을  data: [ ...헬스장목록... ] 으로 줘서 
+      // 만약에 {"currentCount": 10,"헬스장목록": [ ... ]} 이면 (data.헬스장목록);으로 코드를 작성해야함
+
+
+
       // response.data + 공공데이터 API가 원래 {data: [...]} 형태로 응답
     }, []);
     // 현재 상태변수에 졵하는 리스트들을 tr로 구성하여 하나씩 html을 만들기
