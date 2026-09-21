@@ -7,6 +7,7 @@ export default function UseRef1(props) {
     const [stateNum, setStateNum] = useState(0); // 상태변수 state변수
     const refNum = useRef(0); // ref변수 참조변수
     let myNum = 0; // 지역변수
+    // 랜더링 : 함수 재호출
 
     // useState = 값도 저장하고, 화면도 다시 그림
     // setStateNum을 호출하면 값이 바뀌고, React가 컴포넌트를 다시 렌더링

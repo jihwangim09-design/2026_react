@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import TopNavi from "./TopNavi";
 import UseRef1 from "./UseRef1";
+import UseRef2 from "./UseRef2";
 
 export default function App(props){
     return (<>
@@ -8,6 +9,7 @@ export default function App(props){
         <Routes>
             <Route path="/" element={ <UseRef1/>} />
             <Route path="/use-ref1" element={ <UseRef1/>} />
+            <Route path="/use-ref2" element={ <UseRef2/>} />
             {/* <Route path="/use-ref2" element={ <UseRefExam2/>} />*/}
         </Routes>
     
