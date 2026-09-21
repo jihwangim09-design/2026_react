@@ -49,10 +49,18 @@ const create = createRoot( root );
     //</BrowserRouter>
 //)
 
-import App3 from "./example/practice3/App";
+// import App3 from "./example/practice3/App";
+//import { BrowserRouter } from "react-router-dom";
+// create.render( 
+    //<BrowserRouter>
+    //<App3/> 
+    //</BrowserRouter>
+//)
+
+import App from "./example/day06/App";
 import { BrowserRouter } from "react-router-dom";
-create.render( 
-    <BrowserRouter>
-    <App3/> 
+create.render(
+    <BrowserRouter> {/* 최초 렌더링 컴포넌트 감싼다. */}
+        <App/>
     </BrowserRouter>
 )
