@@ -6,8 +6,8 @@ export default function App(props){
     return (<>
         <TopNavi></TopNavi>
         <Routes>
-            <Route path="/" element={ <UseRefExam1/>} />
-            <Route path="/use-ref1" element={ <UseRefExam1/>} />
+            <Route path="/" element={ <UseRef1/>} />
+            <Route path="/use-ref1" element={ <UseRef1/>} />
             {/* <Route path="/use-ref2" element={ <UseRefExam2/>} />*/}
         </Routes>
     

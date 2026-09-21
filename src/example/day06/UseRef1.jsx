@@ -35,6 +35,7 @@ export default function UseRef1(props) {
         <div>
             <p>State : {stateNum}</p>
             <p>Ref : {refNum.current}</p>
+            <p>myNum : {refNum.current}</p>
             <button onClick={plusState}>State증가</button>
             <button onClick={plusRef}>Ref증가</button>
             <button onClick={plusMyNum}>myNum증가</button>
