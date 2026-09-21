@@ -18,6 +18,7 @@ export default function UseRef1(props) {
     // useRef(0)은 { current: 0 }이라는 객체를 하나 만들고 . 그 안의 .current라는 속성에 값을 저장
     // refNum.current를 바꿔도, useState와 달리 화면이 다시 그려지지 않음
     // "Ref증가" 버튼을 누르면, 콘솔에는 값이 증가하는 게 찍히지만 화면에 보이는 Ref : {refNum.current} 숫자는 그대로임
+    // 화면에 안 보여도 되는 값을 기억해두고 싶을 때: ex: 타이머 ID, 이전 값 기억, DOM 요소에 직접 접근할
     const plusRef = () => {
         refNum.current = refNum.current + 1;
         console.log('Ref증가', refNum.current);
@@ -27,7 +28,8 @@ export default function UseRef1(props) {
     const plusMyNum = () => {
         console.log('일반 변수증가', ++myNum);
     }
-
+    // 값을 저장하는 방법은 여러 가지가 있는데, 그중 오직 useState만 화면을 자동으로 갱신시킨다.
+    // useRef는 값은 기억하지만 화면은 안 바꾸고, 일반 변수는 값조차 기억 못 한다
     return (<>
         <h2>useRef 사용하기</h2>
         <div>
