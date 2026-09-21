@@ -1,0 +1,33 @@
+* {
+    margin: 5px;
+}
+input,
+textarea {
+    width: 95%;
+}
+input[type="submit"] {
+    width: 100px;
+}
+#boradTable{
+    border: 1px solid gray;
+    border-collapse: collapse;
+    width: 500px;
+}
+#boardTable tr{
+    text-align: center;
+}
+#boardTable th,
+td
+{
+    border: 1px solid grey;
+}
+#boardTable td{
+    text-align: left;
+}
+#boardTable td.cen{
+    text-align: center;
+}
+#boardTable td.submit{
+    text-align: left;
+}
+
