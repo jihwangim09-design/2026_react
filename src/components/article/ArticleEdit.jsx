@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function ArticleEdit(props){
     const [title, setTitle] = useState(props.selectRow.title);
     const [writer, setWriter] = useState(props.selectRow.writer);
-    const [contents, setCommnets] = useState(props.selectRow.contents);
+    const [contents, setContents] = useState(props.selectRow.contents);
     return(<>
     <article>
         <form onSubmit={(event)=> {

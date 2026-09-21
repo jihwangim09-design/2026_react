@@ -16,7 +16,7 @@ export default function ArticleView(props){
                 </tr>
                 <tr>
                     <th>날짜</th>
-                    <td>{props.selectRow.data}</td>
+                    <td>{props.selectRow.date}</td>
                 </tr>
                 <tr>
                     <th>내용1</th>
@@ -24,7 +24,7 @@ export default function ArticleView(props){
                 </tr>
                 <tr>
                     <th>내용2</th>
-                    <td>{props.selectRow.contents.split('/n').map((currVal) =>{
+                    <td>{props.selectRow.contents.split('\n').map((currVal) =>{
                         return(<>
                         {currVal} <br key={Math.random()} />
                         </>);

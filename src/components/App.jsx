@@ -1,11 +1,11 @@
 import { useState } from "react";
 import ArticleList from "./article/ArticleList";
-import ArticleView from "./article/ArticleList";
-import ArticleWrite from "./article/ArticleList";
+import ArticleView from "./article/ArticleView";
+import ArticleWrite from "./article/ArticleWrite";
 import ArticleEdit from "./article/ArticleEdit";
-import NavList from "./Navigation/NavList";
-import NavWrite from "./Navigation/NavList";
-import NavView from "./Navigation/NavList";
+import NavList from "./navigation/NavList";
+import NavWrite from "./navigation/NavWriter";
+import NavView from "./navigation/NavView";
 import NavEdit from "./navigation/NavEdit";
 
 
@@ -20,7 +20,7 @@ function Header(props){
 }
 
 export default function App(props){
-    const boardData = useState([
+    const [boardData, setBoardData] = useState([
     {no:1, title:'오늘은 React공부하는날', writer:'낙짜쌤', date:'2025-01-01', 
       contents:'React를 \n뽀개봅시당'},
     {no:2, title:'어제는 Javascript공부해씸', writer:'유겸쌤', date:'2025-02-02', 
@@ -73,8 +73,8 @@ export default function App(props){
             ></NavWrite>
         );
         articleComp = <ArticleWrite writeAction={(t, w, c) => {
-            let nowDate = new Date().toISOString.slice(0, 10);
-            let addBoardData = {no:nextNo, title:t, writer:w, contents:c, data:nowDate};
+            let nowDate = new Date().toISOString().slice(0, 10);
+            let addBoardData = {no:nextNo, title:t, writer:w, contents:c, date:nowDate};
             let copyBoardDate = [...boardData];
             copyBoardDate.push(addBoardData);
             setBoardData(copyBoardDate);
@@ -106,7 +106,20 @@ export default function App(props){
             }
         }
     
-        articleComp = <ArticleEdit selectRow={selectRow}></ArticleEdit>;
+        articleComp = <ArticleEdit selectRow={selectRow}
+            editAction={(t, w, c)=>{
+                let editBoardData = {no:no, title:t, writer:w, contents:c, date:selectRow.date};
+                let copyBoardData = [...boardData];
+                for(let i=0; i<copyBoardData.length ; i++){
+                    if(copyBoardData[i].no===no){
+                        copyBoardData[i] = editBoardData;
+                        break;
+                    }
+                }
+                setBoardData(copyBoardData);
+                setMode('view');
+            }}
+        ></ArticleEdit>;
     }
     return (<>
     <Header title={titleVar}></Header>

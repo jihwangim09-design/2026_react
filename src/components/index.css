@@ -8,7 +8,7 @@ textarea {
 input[type="submit"] {
     width: 100px;
 }
-#boradTable{
+#boardTable{
     border: 1px solid gray;
     border-collapse: collapse;
     width: 500px;

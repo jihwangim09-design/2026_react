@@ -8,7 +8,7 @@ export default function NavEdit(props){
         {" "}
         <a href="/" onClick={function(event){
             event.preventDefault();
-            props.onBack();
+            props.onChangeMode();
         }}>목록</a>
     </nav>
     </>);

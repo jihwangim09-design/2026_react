@@ -57,10 +57,15 @@ const create = createRoot( root );
     //</BrowserRouter>
 //)
 
-import App from "./example/day06/App";
-import { BrowserRouter } from "react-router-dom";
+// import App from "./example/day06/App";
+// import { BrowserRouter } from "react-router-dom";
+// create.render(
+    //<BrowserRouter> {/* 최초 렌더링 컴포넌트 감싼다. */}
+        //<App/>
+    //</BrowserRouter>
+//)
+
+import App from "./components/App";
 create.render(
-    <BrowserRouter> {/* 최초 렌더링 컴포넌트 감싼다. */}
-        <App/>
-    </BrowserRouter>
+    <App/>
 )
