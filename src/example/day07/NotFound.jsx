@@ -5,9 +5,9 @@ export default function NotFound(props){
     // 라우터 : 특정 url 경로의 컴포넌트를 불러오려고
     return(<>
     <h2>Not Found</h2>
-    <P>
+    <p>
         페이지를 찾을 수 없습니다. ㅜㅜ <br/>
         <Link to="/list">목록으로 바로가기</Link>
-    </P>
+    </p>
     </>)
 }

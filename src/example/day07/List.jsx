@@ -4,13 +4,17 @@ import { Link } from "react-router-dom";
 
 export default function List(props){
     const [boardData, setBoardData] = useState([]);
-    let requestUrl = "http://localhost:8080";
+    let requestUrl = "http://localhost:8080/api";
 
-    useEffect(async function(){
-        const response = await axios.get( requestUrl );
+    useEffect(() => {
+    async function getBoardData() {
+        const response = await axios.get(requestUrl);
         const data = response.data;
-        setBoardData( data );
-    } , [] );
+        setBoardData(data);
+    }
+
+    getBoardData();
+}, []);
 
     let lists = boardData.map((row) => {
         let date = row.regdate.substring(0,10);
