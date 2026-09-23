@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./NotFound";
 import List from "./List";
+import Write from "./Write";
 
 export default function App(props){
     // Route path='*' = 와일드카드 (모든주소) 
@@ -8,6 +9,7 @@ export default function App(props){
     <Routes>
         <Route path='*' element={<NotFound/>} />
         <Route path="/list" element={<List/>} />
+        <Route path="/write" element={<Write/>} />
     </Routes>
     </>)
 }
