@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function NotFound(props){
     // html에서는 <br> 이렇게 해도 되는데 react에서는 <br/> 닫아야 작동
-    // 라우터 : 특정 url 경로로 페이지로 이동
+    // 라우터 : 특정 url 경로의 컴포넌트를 불러오려고
     return(<>
     <h2>Not Found</h2>
     <P>
