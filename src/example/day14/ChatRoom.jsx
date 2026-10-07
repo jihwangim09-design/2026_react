@@ -1,76 +1,72 @@
-import { Client } from "@stomp/stompjs";
-import { useEffect, useRef, useState } from "react"
-// ***** 웹소켓/STOMP 설치 ***** 1. 설치 : npm i @stomp/stompjs 
 
-export default function ChatRoom(props){
-    // 1. useState이란? 상태(값) 저장하는 *변경시 해당 컴포넌트/함수 재실행/재호출* 훅/라이브러리
-    // const [ 변수명 , set변수명 ] = useState( 초기값 );
-    const [ message , setMessage ] = useState(''); // 입력받은 메시지
-    const [ messages , setMessages ] = useState([]); // 메시지들 , 서버로부터 받은 메시지들
+ 	
+import  { useState, useEffect, useRef } from 'react';
+import { Client } from '@stomp/stompjs'; // npm @stomp/stompjs
 
-    // * useRef 이란? 상태(값)을 저장하고 *다른 상태와 상관없이 새로고침/초기화 방지 => 상태유지 *
-    // const 변수명 = useRef( 초기값 ); , useRef 변수는 .current 속성에 값 보관
-    const clientRef = useRef( null ); // 지역변수vs상태(state)변수vs참조(useRef)변수 중요1
-    // 2. 전송시 백엔드에게 메시지 보내기
-    // 컴포넌트 최초 실행시 한번만 실행
-    useEffect( () => { // useEffect 중요3
-        // 2. const client = new Client( {brokerURL : "접속할백엔드브로커주소" , onConnect : 접속성공이벤트 } )
-        const client = new Client( {
-                brokerURL : "ws://localhost:8080/ws-chat" , //스프링의 'registerStompEndpoints' 정의 주소와 일치 )
-                // 3. 만약에 stomp 접속 성공시 특정 경로 구독!
-                onConnect : () => { // 접속 성공하면 실행되는 이벤트/함수 
-                // 특정 경로 구독 신청
-                // client.subscribe("/구독경로" , (message)=>{ 메시지를 받았을 떄 } ) // 스프링의 'configureMessageBroker' 정의 주소와 일치
-                client.subscribe("/sub/chat/room/general" , (message)=>{} ) 
-                // 4. 만약에 특정 경로의 구독에서 메시지를 받았을 떄
-                // * JSON.parse(문자열 -> JS객체 변환) vs JSON.stringify( JS객체->문자열 변환)
-                // * AXIOS 통신은 JSON 기본값으로 자동변환 지원!!
-                messages.push( JSON.parse( message.body) ); // message.body 메시지 본문
-                setMessage( message ); // 렌더링
-            
-            }
-        }) // client end
-        // 5. stomp 실행 , client.activate()
-        client.activate()
-        // 6. client 객체 다른 함수(전송함수) 사용하기 위해 
-        clientRef.current = client;
-        // 7. 만약에 컴포넌트 사라지면(생명주기 중요2) , stomp 종료 , client.deactivate()
-        return () => { client.deactivate();}
+export default function ChatRoom( props ) {
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState('');
+  const clientRef = useRef(null);
 
+  useEffect(() => {
+    // STOMP 클라이언트 인스턴스 생성 및 통신 옵션 설정
+    const client = new Client({
+      // 백엔드 웹소켓 연결용 엔드포인트 URL
+      brokerURL: 'ws://localhost:8080/ws-chat',
+      // 웹소켓 핸드셰이크 및 STOMP 브로커 연결 성공 시 실행되는 콜백
+      onConnect: () => {
+        // 'general' 방 토픽 경로(/sub/chat/room/general) 구독 등록
+        client.subscribe('/sub/chat/room/general', (message) => {
+          // 수신된 JSON 형식의 메시지 본문(body)을 JS 객체로 파싱하여 배열에 직접 push
+          messages.push( JSON.parse(message.body ) );
+          // 배열의 얕은 복사본(새로운 참조값)을 만들어 상태를 업데이트하고 리렌더링 유발
+          setMessages( [...messages] )
+        });
+      },
+    });
 
+    // 클라이언트 활성화 (실제 웹소켓 연결 시작)
+    client.activate();
+    // 컴포넌트 전역에서 클라이언트를 재참조할 수 있도록 ref에 저장
+    clientRef.current = client;
 
-    } , [ ])
+    // 컴포넌트 언마운트 시 실행되는 클린업 함수
+    return () => {
+      // 페이지 이탈 또는 컴포넌트 제거 시 소켓 연결을 안전하게 해제
+      client.deactivate();
+    };
+  }, []); // 빈 배열을 전달하여 컴포넌트가 처음 렌더링될 때 단 1회만 실행
 
-    // *전송시 백엔드에게 메시지 보내기 이게 2번
-    const sendMessage = ( e ) => {
-        console.log("메시지 보내기");
-        // 8. 만약에 소켓객체가 없으면 실패
-        if( clientRef.current == null) return;
-        // 9. 메시지 전송 , client.publish( )
-        // clientRef.current.publish({ destination : "/발행주소" , body : 내용물 } )
-        // 발행주소 : 스프링의 configureMessageBroker 정의된 발행주소 + @MessageMapping 정의된 주소
-        const info = { // 스프링 MessageDto 참조하여 구성
-            tyep : "TALK" , rooId : "general" , sender : "user" , 
-            content : message , date : new Date().toISOString()
-        }
-        clientRef.current.publish({ 
-            destination : "/pub/chat/message" , 
-            body : JSON.stringify(info) , // JSON.stringify() , JS객체->문자열 변환 함수
+  // 메시지 전송 처리 이벤트 핸들러
+  const sendMessage = (e) => {
+    // 클라이언트 인스턴스가 없거나 소켓이 연결되지 않은 상태라면 함수 종료
+    if (clientRef.current == null ) return;
 
-        })
-    }
+    // 브로커의 메시지 발행 경로(/pub/chat/message)로 데이터 전송
+    clientRef.current.publish({
+      destination: '/pub/chat/message',
+      // 서버 규격(DTO)에 맞춰 대화 데이터를 JSON 문자열로 직렬화하여 본문에 설정
+      body: JSON.stringify({
+        type: 'TALK',          // 메시지 유형 (일반 대화)
+        roomId: 'general',     // 대상 채팅방 식별자
+        sender: 'user',        // 발신자 이름 또는 식별자
+        content: message,       // 전송할 메시지 내용
+      }),
+    });
 
-    return (<>
+  };
 
-
-        <h3>채팅방</h3>
-        { messages.map( (msg) =>  {
-                <div> {msg.sender} : { msg.content } </div>
-            })
-
-        }
-
-        <input value={ message } onChange={ (e) => setMessage( e.target.value ) } />
-        <button type="button" onClick={ sendMessage }> 전송 </button>
-    </>)
-}
+  return (
+    <div>
+      <div>
+        {messages.map((msg) => (
+          <div>{msg.sender}: {msg.content} </div>
+        ))}
+      </div>
+      <div >
+        <input  value={message} onChange={(e) => setMessage(e.target.value)} />
+        <button type="button" onClick={ sendMessage }>전송</button>
+      </div>
+    </div>
+  );
+};
